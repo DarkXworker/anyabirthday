@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Anya!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .card {
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding-bottom: 30px;
+            transform-style: preserve-3d;
+            transition: all 0.8s;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            padding: 30px 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 5px;
+            position: relative;
+        }
+        
+        .photo-frame {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid white;
+            margin: -90px auto 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
+            transition: transform 0.5s;
+        }
+        
+        .photo-frame:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+        
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .message {
+            padding: 0 30px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(255, 117, 140, 0.4);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 117, 140, 0.6);
+        }
+        
+        .btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: translateX(-100%);
+        }
+        
+        .btn:hover::after {
+            transform: translateX(100%);
+            transition: transform 0.6s ease;
+        }
+        
+        /* Falling hearts animation */
+        .falling-hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .falling-heart {
+            position: absolute;
+            font-size: 24px;
+            color: #ff6b6b;
+            animation: falling linear infinite;
+            opacity: 0;
+        }
+        
+        @keyframes falling {
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Floating balloons */
+        .balloon {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            box-shadow: inset -7px -7px 10px rgba(0,0,0,0.1);
+            animation: float 8s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        .balloon::before {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 25px;
+            width: 10px;
+            height: 15px;
+            background: #ff8e8e;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        .balloon::after {
+            content: "";
+            position: absolute;
+            bottom: -25px;
+            left: 28px;
+            width: 4px;
+            height: 30px;
+            background: #ccc;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(-5deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(5deg);
+            }
+        }
+        
+        /* Sparkle effect */
+        .sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkle 1.5s infinite;
+            opacity: 0;
+        }
+        
+        @keyframes sparkle {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Falling hearts container -->
+    <div class="falling-hearts" id="fallingHearts"></div>
+    
+    <!-- Floating balloons -->
+    <div class="balloon" style="left: 10%; top: 80%; animation-delay: 0s;"></div>
+    <div class="balloon" style="left: 20%; top: 70%; animation-delay: 1s; background: #ffb3b3;"></div>
+    <div class="balloon" style="left: 80%; top: 75%; animation-delay: 2s; background: #ff8e8e;"></div>
+    <div class="balloon" style="left: 90%; top: 85%; animation-delay: 3s; background: #ffd3d3;"></div>
+    
+    <div class="card">
+        <!-- Sparkle effects around header -->
+        <div class="sparkle" style="top: 20%; left: 15%;"></div>
+        <div class="sparkle" style="top: 30%; left: 80%; animation-delay: 0.5s;"></div>
+        <div class="sparkle" style="top: 15%; left: 50%; animation-delay: 1s;"></div>
+        
+        <div class="header">
+            <h1>Happy Birthday</h1>
+            <div class="subtitle">My Beautiful Anya</div>
+        </div>
+        
+        <div class="photo-frame">
+            <img src="https://i.ibb.co/wrYP9N4b/photo-2025-07-20-15-24-49.jpg" alt="kIARA (Anya)">
+        </div>
+        
+        <div class="message">
+            <p>Dear kIARA,</p>
+            <p>On your special day, I want you to know how incredibly lucky I am to know you. Your smile brightens my world in ways words can't describe.</p>
+            <p>May this year bring you endless joy and happiness!</p>
+        </div>
+        
+        <a href="message.html" class="btn">Your Special Message</a>
+    </div>
+
+    <script>
+        // Create falling hearts
+        function createFallingHearts() {
+            const container = document.getElementById('fallingHearts');
+            const heart = document.createElement('div');
+            heart.className = 'falling-heart';
+            heart.innerHTML = '💗';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            heart.style.opacity = (Math.random() * 0.5 + 0.5);
+            container.appendChild(heart);
+            
+            // Remove heart after animation completes
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+        
+        // Create initial hearts
+        for (let i = 0; i < 15; i++) {
+            setTimeout(createFallingHearts, i * 300);
+        }
+        
+        // Continuous hearts
+        setInterval(createFallingHearts, 300);
+        
+        // Create sparkle effects
+        function createSparkles() {
+            const card = document.querySelector('.card');
+            for (let i = 0; i < 5; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 1 + 's';
+                card.appendChild(sparkle);
+                
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 1500);
+            }
+        }
+        
+        // Create sparkles periodically
+        setInterval(createSparkles, 1000);
+        createSparkles();
+    </script>
+</body>
+</html>
