@@ -309,5 +309,71 @@
         setInterval(createSparkles, 1000);
         createSparkles();
     </script>
+<!-- Add this right before </body> in your existing index.html -->
+<div class="music-player">
+    <button class="music-btn" id="playBtn">
+        <i class="fas fa-play"></i>
+    </button>
+    <span class="song-title">Perfect - Ed Sheeran</span>
+    <audio id="bgMusic" loop>
+        <source src="https://github.com/DarkXworker/anyabirthday/blob/main/Perfect%20(Acoustic).mp3?raw=true" type="audio/mpeg">
+    </audio>
+</div>
+
+<script>
+    // Music player functionality
+    const bgMusic = document.getElementById('bgMusic');
+    const playBtn = document.getElementById('playBtn');
+    let isPlaying = false;
+    
+    // Save music state to localStorage
+    function saveMusicState() {
+        localStorage.setItem('musicPlaying', isPlaying);
+        localStorage.setItem('musicTime', bgMusic.currentTime);
+    }
+    
+    playBtn.addEventListener('click', () => {
+        if(isPlaying) {
+            bgMusic.pause();
+            playBtn.innerHTML = '<i class="fas fa-play"></i>';
+        } else {
+            bgMusic.play();
+            playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        }
+        isPlaying = !isPlaying;
+        saveMusicState();
+    });
+    
+    // Auto-play music (muted first to bypass browser restrictions)
+    bgMusic.volume = 0.5;
+    bgMusic.muted = true;
+    const playPromise = bgMusic.play();
+    
+    if (playPromise !== undefined) {
+        playPromise.then(_ => {
+            bgMusic.muted = false;
+            isPlaying = true;
+            playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            saveMusicState();
+        })
+        .catch(error => {
+            playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            isPlaying = false;
+        });
+    }
+    
+    // Load music state if coming back from message.html
+    window.addEventListener('load', () => {
+        const savedState = localStorage.getItem('musicPlaying');
+        const savedTime = localStorage.getItem('musicTime');
+        
+        if(savedState === 'true' && bgMusic.paused) {
+            bgMusic.currentTime = parseFloat(savedTime) || 0;
+            bgMusic.play();
+            playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            isPlaying = true;
+        }
+    });
+</script>
 </body>
 </html>
