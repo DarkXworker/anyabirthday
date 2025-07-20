@@ -30,8 +30,6 @@
             z-index: 1;
             text-align: center;
             padding-bottom: 30px;
-            transform-style: preserve-3d;
-            transition: all 0.8s;
         }
         
         .header {
@@ -39,7 +37,6 @@
             padding: 30px 0;
             color: white;
             position: relative;
-            overflow: hidden;
         }
         
         h1 {
@@ -47,14 +44,12 @@
             font-size: 3rem;
             margin: 0;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            position: relative;
         }
         
         .subtitle {
             font-size: 1.2rem;
             opacity: 0.9;
             margin-top: 5px;
-            position: relative;
         }
         
         .photo-frame {
@@ -67,11 +62,6 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             position: relative;
             z-index: 2;
-            transition: transform 0.5s;
-        }
-        
-        .photo-frame:hover {
-            transform: scale(1.05) rotate(5deg);
         }
         
         .photo-frame img {
@@ -97,29 +87,11 @@
             font-weight: 600;
             box-shadow: 0 5px 15px rgba(255, 117, 140, 0.4);
             transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
         }
         
         .btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(255, 117, 140, 0.6);
-        }
-        
-        .btn::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
-            transform: translateX(-100%);
-        }
-        
-        .btn:hover::after {
-            transform: translateX(100%);
-            transition: transform 0.6s ease;
         }
         
         /* Falling hearts animation */
@@ -158,102 +130,56 @@
             }
         }
         
-        /* Floating balloons */
-        .balloon {
-            position: absolute;
-            width: 60px;
-            height: 80px;
-            background: #ff6b6b;
-            border-radius: 50%;
-            box-shadow: inset -7px -7px 10px rgba(0,0,0,0.1);
-            animation: float 8s ease-in-out infinite;
-            z-index: -1;
-        }
-        
-        .balloon::before {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 25px;
-            width: 10px;
-            height: 15px;
-            background: #ff8e8e;
-            border-radius: 0 0 5px 5px;
-        }
-        
-        .balloon::after {
-            content: "";
-            position: absolute;
-            bottom: -25px;
-            left: 28px;
-            width: 4px;
-            height: 30px;
-            background: #ccc;
-        }
-        
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) rotate(-5deg);
-            }
-            50% {
-                transform: translateY(-30px) rotate(5deg);
-            }
-        }
-        
-        /* Sparkle effect */
-        .sparkle {
-            position: absolute;
-            width: 5px;
-            height: 5px;
+        /* Music player */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
             background: white;
-            border-radius: 50%;
-            animation: sparkle 1.5s infinite;
-            opacity: 0;
+            border-radius: 50px;
+            padding: 10px 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            z-index: 100;
         }
         
-        @keyframes sparkle {
-            0% {
-                transform: scale(0);
-                opacity: 0;
-            }
-            50% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(0);
-                opacity: 0;
-            }
+        .music-btn {
+            background: transparent;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #ff758c;
+            margin: 0 5px;
+        }
+        
+        .song-title {
+            font-size: 12px;
+            margin-left: 5px;
+            color: #555;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100px;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- Falling hearts container -->
     <div class="falling-hearts" id="fallingHearts"></div>
     
-    <!-- Floating balloons -->
-    <div class="balloon" style="left: 10%; top: 80%; animation-delay: 0s;"></div>
-    <div class="balloon" style="left: 20%; top: 70%; animation-delay: 1s; background: #ffb3b3;"></div>
-    <div class="balloon" style="left: 80%; top: 75%; animation-delay: 2s; background: #ff8e8e;"></div>
-    <div class="balloon" style="left: 90%; top: 85%; animation-delay: 3s; background: #ffd3d3;"></div>
-    
     <div class="card">
-        <!-- Sparkle effects around header -->
-        <div class="sparkle" style="top: 20%; left: 15%;"></div>
-        <div class="sparkle" style="top: 30%; left: 80%; animation-delay: 0.5s;"></div>
-        <div class="sparkle" style="top: 15%; left: 50%; animation-delay: 1s;"></div>
-        
         <div class="header">
             <h1>Happy Birthday</h1>
             <div class="subtitle">My Beautiful Anya</div>
         </div>
         
         <div class="photo-frame">
-            <img src="https://i.ibb.co/wrYP9N4b/photo-2025-07-20-15-24-49.jpg" alt="kIARA (Anya)">
+            <img src="https://i.ibb.co/wrYP9N4b/photo-2025-07-20-15-24-49.jpg" alt="Anya">
         </div>
         
         <div class="message">
-            <p>Dear kIARA,</p>
+            <p>Dear Anya,</p>
             <p>On your special day, I want you to know how incredibly lucky I am to know you. Your smile brightens my world in ways words can't describe.</p>
             <p>May this year bring you endless joy and happiness!</p>
         </div>
@@ -261,119 +187,70 @@
         <a href="message.html" class="btn">Your Special Message</a>
     </div>
 
+    <!-- Music Player -->
+    <div class="music-player">
+        <button class="music-btn" id="playBtn">
+            <i class="fas fa-pause"></i>
+        </button>
+        <span class="song-title">Perfect (Acoustic)</span>
+        <audio id="bgMusic" loop autoplay>
+            <source src="https://github.com/DarkXworker/anyabirthday/blob/main/Perfect%20(Acoustic).mp3?raw=true" type="audio/mpeg">
+        </audio>
+    </div>
+
     <script>
-        // Create falling hearts
+        // Falling hearts animation
         function createFallingHearts() {
             const container = document.getElementById('fallingHearts');
             const heart = document.createElement('div');
             heart.className = 'falling-heart';
-            heart.innerHTML = '💗';
+            heart.innerHTML = '❤️';
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
             heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
-            heart.style.opacity = (Math.random() * 0.5 + 0.5);
             container.appendChild(heart);
             
-            // Remove heart after animation completes
-            setTimeout(() => {
-                heart.remove();
-            }, 5000);
+            setTimeout(() => heart.remove(), 5000);
         }
         
-        // Create initial hearts
         for (let i = 0; i < 15; i++) {
             setTimeout(createFallingHearts, i * 300);
         }
-        
-        // Continuous hearts
         setInterval(createFallingHearts, 300);
         
-        // Create sparkle effects
-        function createSparkles() {
-            const card = document.querySelector('.card');
-            for (let i = 0; i < 5; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.className = 'sparkle';
-                sparkle.style.left = Math.random() * 100 + '%';
-                sparkle.style.top = Math.random() * 100 + '%';
-                sparkle.style.animationDelay = Math.random() * 1 + 's';
-                card.appendChild(sparkle);
-                
-                setTimeout(() => {
-                    sparkle.remove();
-                }, 1500);
+        // Music player functionality
+        const bgMusic = document.getElementById('bgMusic');
+        const playBtn = document.getElementById('playBtn');
+        let isPlaying = true; // Auto-play starts as true
+        
+        // Auto-play with user interaction workaround
+        document.body.addEventListener('click', initAudio, { once: true });
+        
+        function initAudio() {
+            bgMusic.volume = 0.5;
+            bgMusic.play()
+                .then(() => {
+                    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    isPlaying = true;
+                })
+                .catch(e => {
+                    console.log("Auto-play prevented, waiting for user interaction");
+                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    isPlaying = false;
+                });
+        }
+        
+        // Toggle play/pause
+        playBtn.addEventListener('click', () => {
+            if(isPlaying) {
+                bgMusic.pause();
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            } else {
+                bgMusic.play();
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
             }
-        }
-        
-        // Create sparkles periodically
-        setInterval(createSparkles, 1000);
-        createSparkles();
-    </script>
-<!-- Add this right before </body> in your existing index.html -->
-<div class="music-player">
-    <button class="music-btn" id="playBtn">
-        <i class="fas fa-play"></i>
-    </button>
-    <span class="song-title">Perfect - Ed Sheeran</span>
-    <audio id="bgMusic" loop>
-        <source src="https://github.com/DarkXworker/anyabirthday/blob/main/Perfect%20(Acoustic).mp3?raw=true" type="audio/mpeg">
-    </audio>
-</div>
-
-<script>
-    // Music player functionality
-    const bgMusic = document.getElementById('bgMusic');
-    const playBtn = document.getElementById('playBtn');
-    let isPlaying = false;
-    
-    // Save music state to localStorage
-    function saveMusicState() {
-        localStorage.setItem('musicPlaying', isPlaying);
-        localStorage.setItem('musicTime', bgMusic.currentTime);
-    }
-    
-    playBtn.addEventListener('click', () => {
-        if(isPlaying) {
-            bgMusic.pause();
-            playBtn.innerHTML = '<i class="fas fa-play"></i>';
-        } else {
-            bgMusic.play();
-            playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-        }
-        isPlaying = !isPlaying;
-        saveMusicState();
-    });
-    
-    // Auto-play music (muted first to bypass browser restrictions)
-    bgMusic.volume = 0.5;
-    bgMusic.muted = true;
-    const playPromise = bgMusic.play();
-    
-    if (playPromise !== undefined) {
-        playPromise.then(_ => {
-            bgMusic.muted = false;
-            isPlaying = true;
-            playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            saveMusicState();
-        })
-        .catch(error => {
-            playBtn.innerHTML = '<i class="fas fa-play"></i>';
-            isPlaying = false;
+            isPlaying = !isPlaying;
         });
-    }
-    
-    // Load music state if coming back from message.html
-    window.addEventListener('load', () => {
-        const savedState = localStorage.getItem('musicPlaying');
-        const savedTime = localStorage.getItem('musicTime');
-        
-        if(savedState === 'true' && bgMusic.paused) {
-            bgMusic.currentTime = parseFloat(savedTime) || 0;
-            bgMusic.play();
-            playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            isPlaying = true;
-        }
-    });
-</script>
+    </script>
 </body>
 </html>
