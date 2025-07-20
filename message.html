@@ -30,6 +30,19 @@
             padding: 40px 30px;
             text-align: center;
             backdrop-filter: blur(5px);
+            transform: scale(0.95);
+            animation: cardEntrance 0.8s ease-out forwards;
+        }
+        
+        @keyframes cardEntrance {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
         
         h2 {
@@ -37,6 +50,16 @@
             font-size: 2.5rem;
             color: #764ba2;
             margin-bottom: 20px;
+            animation: textGlow 2s infinite alternate;
+        }
+        
+        @keyframes textGlow {
+            from {
+                text-shadow: 0 0 5px rgba(118, 75, 162, 0.5);
+            }
+            to {
+                text-shadow: 0 0 15px rgba(118, 75, 162, 0.8);
+            }
         }
         
         .love-letter {
@@ -48,6 +71,15 @@
         
         .love-letter p {
             margin-bottom: 15px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+            animation-delay: calc(var(--order) * 0.3s);
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
         }
         
         .signature {
@@ -56,6 +88,8 @@
             color: #764ba2;
             margin-top: 30px;
             text-align: right;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out 2s forwards;
         }
         
         .polaroid {
@@ -65,11 +99,18 @@
             margin: 30px auto;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transform: rotate(5deg);
-            transition: all 0.3s;
+            transition: all 0.5s;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out 1.5s forwards, float 3s ease-in-out infinite 2s;
         }
         
-        .polaroid:hover {
-            transform: rotate(0deg) scale(1.05);
+        @keyframes float {
+            0%, 100% {
+                transform: rotate(5deg) translateY(0);
+            }
+            50% {
+                transform: rotate(5deg) translateY(-10px);
+            }
         }
         
         .polaroid img {
@@ -96,6 +137,8 @@
             font-weight: 600;
             box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
             transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
         
         .btn-back:hover {
@@ -103,78 +146,204 @@
             box-shadow: 0 8px 20px rgba(118, 75, 162, 0.6);
         }
         
-        .stars {
+        .btn-back::after {
+            content: "";
             position: absolute;
-            width: 100%;
-            height: 100%;
             top: 0;
             left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: translateX(-100%);
+        }
+        
+        .btn-back:hover::after {
+            transform: translateX(100%);
+            transition: transform 0.6s ease;
+        }
+        
+        /* Floating hearts animation */
+        .floating-hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
             z-index: 0;
         }
         
-        .star {
+        .floating-heart {
             position: absolute;
-            font-size: 20px;
-            animation: twinkle 4s linear infinite;
-            opacity: 0;
+            font-size: 24px;
+            color: #ff6b6b;
+            animation: floating 8s ease-in-out infinite;
+            opacity: 0.7;
         }
         
-        @keyframes twinkle {
+        @keyframes floating {
             0%, 100% {
-                opacity: 0;
-                transform: scale(0.5);
+                transform: translateY(0) rotate(0deg);
             }
             50% {
-                opacity: 1;
-                transform: scale(1);
+                transform: translateY(-50px) rotate(10deg);
             }
         }
+        
+        /* Music player */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 50px;
+            padding: 10px 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            z-index: 100;
+        }
+        
+        .music-btn {
+            background: transparent;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #764ba2;
+            margin: 0 5px;
+        }
+        
+        .song-title {
+            font-size: 12px;
+            margin-left: 5px;
+            color: #555;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100px;
+        }
+        
+        /* Couple icons */
+        .couple-icon {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0.8;
+            z-index: -1;
+        }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="stars" id="stars"></div>
+    <!-- Floating hearts background -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+    
+    <!-- Couple icons floating around -->
+    <div class="couple-icon" style="top: 10%; left: 10%;">👫</div>
+    <div class="couple-icon" style="top: 80%; left: 15%; animation-delay: 1s;">💑</div>
+    <div class="couple-icon" style="top: 20%; left: 80%; animation-delay: 2s;">👩‍❤️‍👨</div>
+    <div class="couple-icon" style="top: 70%; left: 85%; animation-delay: 3s;">💏</div>
     
     <div class="message-card">
         <h2>For My Anya</h2>
         
         <div class="love-letter">
-            <p>My Dearest Reshma,</p>
-            <p>As you celebrate your special day, I want you to know how much you mean to me. Your nickname "Anya" perfectly captures your uniqueness - just like no one else in this world.</p>
-            <p>Every moment with you feels like a beautiful dream I never want to wake up from. Your laughter is my favorite melody, and your smile is the most beautiful sight my eyes have ever seen.</p>
-            <p>On your birthday, I wish you all the happiness in the world, because that's exactly what you've brought into my life.</p>
+            <p style="--order: 1">My Dearest Reshma,</p>
+            <p style="--order: 2">As you celebrate your special day, I want you to know how much you mean to me. Your nickname "Anya" perfectly captures your uniqueness - just like no one else in this world.</p>
+            <p style="--order: 3">Every moment with you feels like a beautiful dream I never want to wake up from. Your laughter is my favorite melody, and your smile is the most beautiful sight my eyes have ever seen.</p>
             
             <div class="polaroid">
                 <img src="special_memory.jpg" alt="Our Special Memory">
                 <div class="polaroid-caption">My Favorite Memory</div>
             </div>
             
-            <p>No matter how many birthdays come and go, I promise to always be here to make each one more special than the last.</p>
-            <p>With all my love,</p>
+            <p style="--order: 4">On your birthday, I wish you all the happiness in the world, because that's exactly what you've brought into my life.</p>
+            <p style="--order: 5">No matter how many birthdays come and go, I promise to always be here to make each one more special than the last.</p>
             <div class="signature">[Your Name]</div>
         </div>
         
-        <a href="index.html" class="btn-back">Back to Birthday</a>
+        <a href="index.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Back to Birthday
+        </a>
+    </div>
+
+    <!-- Music player -->
+    <div class="music-player">
+        <button class="music-btn" id="playBtn">
+            <i class="fas fa-play"></i>
+        </button>
+        <span class="song-title">Tum Hi Ho - Aashiqui 2</span>
+        <audio id="bgMusic" loop>
+            <source src="YOUR_SONG_LINK.mp3" type="audio/mpeg">
+        </audio>
     </div>
 
     <script>
-        // Create twinkling stars
-        function createStars() {
-            const starsContainer = document.getElementById('stars');
+        // Create floating hearts
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = Math.random() * 100 + 'vh';
+            heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            container.appendChild(heart);
             
-            for (let i = 0; i < 20; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.innerHTML = '✨';
-                star.style.left = Math.random() * 100 + 'vw';
-                star.style.top = Math.random() * 100 + 'vh';
-                star.style.animationDelay = Math.random() * 4 + 's';
-                star.style.fontSize = (Math.random() * 10 + 10) + 'px';
-                starsContainer.appendChild(star);
-            }
+            // Remove heart after animation completes
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
         }
         
-        createStars();
+        // Create initial hearts
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createFloatingHearts, i * 800);
+        }
+        
+        // Continuous hearts
+        setInterval(createFloatingHearts, 1000);
+        
+        // Music player functionality
+        const bgMusic = document.getElementById('bgMusic');
+        const playBtn = document.getElementById('playBtn');
+        let isPlaying = false;
+        
+        playBtn.addEventListener('click', () => {
+            if(isPlaying) {
+                bgMusic.pause();
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            } else {
+                bgMusic.play();
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+            isPlaying = !isPlaying;
+        });
+        
+        // Auto-play music (muted first to bypass browser restrictions)
+        bgMusic.volume = 0.5;
+        bgMusic.muted = true;
+        const playPromise = bgMusic.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.then(_ => {
+                // Autoplay started
+                bgMusic.muted = false;
+                isPlaying = true;
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            })
+            .catch(error => {
+                // Autoplay prevented
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                isPlaying = false;
+            });
+        }
+        
+        // Animate paragraphs sequentially
+        document.querySelectorAll('.love-letter p').forEach((p, index) => {
+            p.style.setProperty('--order', index + 1);
+        });
     </script>
 </body>
 </html>
