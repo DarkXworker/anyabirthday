@@ -1,256 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Anya!</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap');
-        
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-            overflow: hidden;
-            font-family: 'Montserrat', sans-serif;
-        }
-        
-        .card {
-            width: 90%;
-            max-width: 500px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-            overflow: hidden;
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            padding-bottom: 30px;
-        }
-        
-        .header {
-            background: linear-gradient(to right, #ff758c, #ff7eb3);
-            padding: 30px 0;
-            color: white;
-            position: relative;
-        }
-        
-        h1 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 3rem;
-            margin: 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-top: 5px;
-        }
-        
-        .photo-frame {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            border: 5px solid white;
-            margin: -90px auto 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            position: relative;
-            z-index: 2;
-        }
-        
-        .photo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .message {
-            padding: 0 30px;
-            color: #555;
-            line-height: 1.8;
-        }
-        
-        .btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 30px;
-            background: linear-gradient(to right, #ff758c, #ff7eb3);
-            color: white;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            box-shadow: 0 5px 15px rgba(255, 117, 140, 0.4);
-            transition: all 0.3s;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 117, 140, 0.6);
-        }
-        
-        /* Falling hearts animation */
-        .falling-hearts {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        .falling-heart {
-            position: absolute;
-            font-size: 24px;
-            color: #ff6b6b;
-            animation: falling linear infinite;
-            opacity: 0;
-        }
-        
-        @keyframes falling {
-            0% {
-                transform: translateY(-50px) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        
-        /* Music player */
-        .music-player {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: white;
-            border-radius: 50px;
-            padding: 10px 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            z-index: 100;
-        }
-        
-        .music-btn {
-            background: transparent;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            color: #ff758c;
-            margin: 0 5px;
-        }
-        
-        .song-title {
-            font-size: 12px;
-            margin-left: 5px;
-            color: #555;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 100px;
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday Anya!</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .card {
+      width: 90%;
+      max-width: 500px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding-bottom: 30px;
+    }
+
+    .header {
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      padding: 30px 0;
+      color: white;
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3rem;
+      margin: 0;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-top: 5px;
+    }
+
+    .photo-frame {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 5px solid white;
+      margin: -90px auto 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 2;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .message {
+      padding: 0 30px;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 30px;
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 5px 15px rgba(255, 117, 140, 0.4);
+      transition: all 0.3s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 117, 140, 0.6);
+    }
+
+    .falling-hearts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .falling-heart {
+      position: absolute;
+      font-size: 24px;
+      color: #ff6b6b;
+      animation: falling linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes falling {
+      0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
 </head>
 <body>
-    <div class="falling-hearts" id="fallingHearts"></div>
-    
-    <div class="card">
-        <div class="header">
-            <h1>Happy Birthday</h1>
-            <div class="subtitle">My Beautiful Anya</div>
-        </div>
-        
-        <div class="photo-frame">
-            <img src="https://i.ibb.co/wrYP9N4b/photo-2025-07-20-15-24-49.jpg" alt="Anya">
-        </div>
-        
-        <div class="message">
-            <p>Dear Anya,</p>
-            <p>On your special day, I want you to know how incredibly lucky I am to know you. Your smile brightens my world in ways words can't describe.</p>
-            <p>May this year bring you endless joy and happiness!</p>
-        </div>
-        
-        <a href="message.html" class="btn">Your Special Message</a>
+
+  <div class="falling-hearts" id="fallingHearts"></div>
+
+  <div class="card">
+    <div class="header">
+      <h1>Happy Birthday</h1>
+      <div class="subtitle">My Beautiful Anya</div>
     </div>
 
-    <!-- Music Player -->
-    <div class="music-player">
-        <button class="music-btn" id="playBtn">
-            <i class="fas fa-pause"></i>
-        </button>
-        <span class="song-title">Perfect (Acoustic)</span>
-        <audio id="bgMusic" loop autoplay>
-            <source src="https://raw.githubusercontent.com/DarkXworker/anyabirthday/main/Perfect%20(Acoustic).mp3" type="audio/mpeg">
-        </audio>
+    <div class="photo-frame">
+      <img src="https://i.ibb.co/wrYP9N4b/photo-2025-07-20-15-24-49.jpg" alt="Anya">
     </div>
 
-    <script>
-        // Falling hearts animation
-        function createFallingHearts() {
-            const container = document.getElementById('fallingHearts');
-            const heart = document.createElement('div');
-            heart.className = 'falling-heart';
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
-            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
-            container.appendChild(heart);
-            
-            setTimeout(() => heart.remove(), 5000);
-        }
-        
-        for (let i = 0; i < 15; i++) {
-            setTimeout(createFallingHearts, i * 300);
-        }
-        setInterval(createFallingHearts, 300);
-        
-        // Music player functionality
-        const bgMusic = document.getElementById('bgMusic');
-        const playBtn = document.getElementById('playBtn');
-        let isPlaying = true; // Auto-play starts as true
-        
-        // Auto-play with user interaction workaround
-        document.body.addEventListener('click', initAudio, { once: true });
-        
-        function initAudio() {
-            bgMusic.volume = 0.5;
-            bgMusic.play()
-                .then(() => {
-                    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                    isPlaying = true;
-                })
-                .catch(e => {
-                    console.log("Auto-play prevented, waiting for user interaction");
-                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
-                    isPlaying = false;
-                });
-        }
-        
-        // Toggle play/pause
-        playBtn.addEventListener('click', () => {
-            if(isPlaying) {
-                bgMusic.pause();
-                playBtn.innerHTML = '<i class="fas fa-play"></i>';
-            } else {
-                bgMusic.play();
-                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            }
-            isPlaying = !isPlaying;
-        });
-    </script>
+    <div class="message">
+      <p>Dear Anya,</p>
+      <p>On your special day, I want you to know how incredibly lucky I am to know you. Your smile brightens my world in ways words can't describe.</p>
+      <p>May this year bring you endless joy and happiness!</p>
+    </div>
+
+    <a href="message.html" class="btn">Your Special Message</a>
+  </div>
+
+  <!-- Hidden Background Music (Autoplay) -->
+  <audio id="bgMusic" loop>
+    <source src="https://raw.githubusercontent.com/DarkXworker/anyabirthday/main/Perfect%20(Acoustic).mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Falling hearts
+    function createFallingHearts() {
+      const container = document.getElementById('fallingHearts');
+      const heart = document.createElement('div');
+      heart.className = 'falling-heart';
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+      container.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    for (let i = 0; i < 15; i++) setTimeout(createFallingHearts, i * 300);
+    setInterval(createFallingHearts, 300);
+
+    // Autoplay fix for mobile browsers
+    const bgMusic = document.getElementById("bgMusic");
+    document.addEventListener("click", () => {
+      bgMusic.volume = 0.5;
+      bgMusic.play();
+    }, { once: true });
+  </script>
+
 </body>
 </html>
